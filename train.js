@@ -82,7 +82,7 @@ class LinkedList {
           prev = current //object a
           console.log(prev)
 
-          current =  next//object b
+          current = next//object b
           console.log(current)
         }
         
