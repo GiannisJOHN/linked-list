@@ -5,6 +5,7 @@ class Node {
         this.next = next
     }
 }
+//methods: addFirst, addLast, removeFirst, removeLast, traverse, reverseList, size, clear, isEmpty, insertAt, removeAt, getAt
 
 class LinkedList {
     constructor () {
@@ -48,21 +49,59 @@ class LinkedList {
         }
     }
 
-
     reverseList() {
-        let prev = null
-        let current = this.head
-        let next
+        
+        
+    }
 
-        while(current !== null) {
-            // null - maria - janis - nikos - helene
-            next = current.next
-            current.next = prev
-            prev = current
-            current = next
+    insertAt(index, data) {
+        if (index < 0) {
+            throw new Error('Index cannot be negative.')
         }
 
-        this.head = prev
+        let newNode = new Node(data)
+
+        if (index === 0) {
+            newNode.next = this.head
+            this.head = newNode
+        } else {
+            let current = this.head
+            let prev = null
+            let currentIndex = 0
+
+            while (current !== null && currentIndex < index) {
+                prev = current
+                current = current.next
+                currentIndex++
+            }
+            // if the loop completes and currentIndex is still less than the desired index, it means the index is out of bounds, and an error is thrown.
+            if (currentIndex < index) {
+                throw new Error('Index out of bounds.');
+            }
+
+            newNode.next = current
+            prev.next = newNode
+        }
+    }
+
+    getAt(index, data) {
+        if (index < 0) {
+            throw new Error('Index cannot be negative.')
+        }
+
+        let current = this.head
+        let currentIndex = 0
+
+        while (current !== null && currentIndex < index) {
+            current = current.next
+            currentIndex++
+        }
+
+        if (currentIndex < index) {
+            throw new Error('Index out of bounds.');
+        }
+
+        return current.data
     }
 }
 
@@ -70,12 +109,15 @@ let List = new LinkedList
 
 List.addFirst('Janis')
 List.addFirst('Nikoleta')
-console.log(List)
-List.removeFirst()
-console.log(List)
+//console.log(List)
+//List.removeFirst()
+//console.log(List)
 List.addFirst('Maria')
-List.addLast('Giorgos')
-console.dir(List, { depth: null})
-List.reverseList()
+//console.dir(List, { depth: null})
+//List.reverseList()
 //List.removeLast()
+List.insertAt(2, 'hullio')
+List.insertAt(0, 'kate')
+//List.insertAt(10, 'ioannis')
+console.log(List.getAt(2));
 console.dir(List, { depth: null})
