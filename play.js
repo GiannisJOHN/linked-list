@@ -50,10 +50,24 @@ class LinkedList {
     }
 
     reverseList() {
-        
+        let current = this.head
+        let prev = null
+        let next
+
+
+        while (current !== null) {
+            next = current.next
+
+            current.next = prev
+
+            prev = current
+            current = next
+        }
+
+        this.head = prev
         
     }
-
+    /*
     insertAt(index, data) {
         if (index < 0) {
             throw new Error('Index cannot be negative.')
@@ -83,8 +97,37 @@ class LinkedList {
             prev.next = newNode
         }
     }
+    */
+   insertAt(index, data) {
+       if (index < 0) {
+            throw new Error('Indext cannot be a negative number')
+       } 
 
-    getAt(index, data) {
+       let newNode = new Node(data)
+
+       if (index === 0) {
+            newNode.next = this.head
+            this.head = newNode
+       } else {
+            let current = this.head
+            let prev = null
+            let currentIndex = 0
+
+            while (current !== null && currentIndex < index) {
+                prev = current
+                current = current.next
+                currentIndex++
+            }
+            
+            prev.next = newNode
+            newNode.next = current
+
+       }
+
+
+   }
+
+    getAt(index) {
         if (index < 0) {
             throw new Error('Index cannot be negative.')
         }
@@ -103,6 +146,26 @@ class LinkedList {
 
         return current.data
     }
+
+    traverse() {
+        let values = []
+
+        let current = this.head
+
+        while (current !== null) {
+
+            let nodeMap = {
+                data: current.data,
+                nextNode: current.next === null ? null : current.next.data
+            }
+            values.push(nodeMap)
+
+            current = current.next
+        }
+
+        console.log(values)
+    }
+
 }
 
 let List = new LinkedList
@@ -117,7 +180,9 @@ List.addFirst('Maria')
 //List.reverseList()
 //List.removeLast()
 List.insertAt(2, 'hullio')
-List.insertAt(0, 'kate')
+//List.insertAt(0, 'kate')
 //List.insertAt(10, 'ioannis')
-console.log(List.getAt(2));
-console.dir(List, { depth: null})
+List.traverse()
+List.reverseList()
+List.traverse()
+//console.dir(List, { depth: null})
