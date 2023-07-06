@@ -67,7 +67,7 @@ class LinkedList {
         this.head = prev
         
     }
-    /*
+    
     insertAt(index, data) {
         if (index < 0) {
             throw new Error('Index cannot be negative.')
@@ -97,7 +97,7 @@ class LinkedList {
             prev.next = newNode
         }
     }
-    */
+    
    insertAt(index, data) {
     
         }
